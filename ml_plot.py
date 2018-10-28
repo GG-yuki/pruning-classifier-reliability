@@ -15,3 +15,6 @@ from sklearn.neural_network import MLPClassifier
 #data = pd.read_csv('KS_manual_pre_process.csv')
 data = pd.read_csv('KS_grubb_pre_processTest1.csv')
 
+ogdf = pd.read_csv('KS_grubb_pre_processTest1.csv') 
+print(data.shape)
+#print(data[data.goal > 100000])
