@@ -525,7 +525,9 @@ t_df.head()
       <th>category</th>
       <th>main_category</th>
       <th>currency</th>
+      <th>deadline</th>
       <th>goal</th>
+      <th>launched</th>
       <th>pledged</th>
       <th>state</th>
       <th>backers</th>
@@ -533,7 +535,6 @@ t_df.head()
       <th>usd pledged</th>
       <th>usd_pledged_real</th>
       <th>usd_goal_real</th>
-      <th>duration</th>
     </tr>
   </thead>
   <tbody>
@@ -544,7 +545,9 @@ t_df.head()
       <td>Narrative Film</td>
       <td>Film &amp; Video</td>
       <td>USD</td>
+      <td>2017-11-01</td>
       <td>30000.0</td>
+      <td>2017-09-02 04:43:57</td>
       <td>2421.0</td>
       <td>failed</td>
       <td>15</td>
@@ -552,7 +555,6 @@ t_df.head()
       <td>100.0</td>
       <td>2421.0</td>
       <td>30000.0</td>
-      <td>59.0</td>
     </tr>
     <tr>
       <th>2</th>
@@ -561,7 +563,9 @@ t_df.head()
       <td>Narrative Film</td>
       <td>Film &amp; Video</td>
       <td>USD</td>
+      <td>2013-02-26</td>
       <td>45000.0</td>
+      <td>2013-01-12 00:20:50</td>
       <td>220.0</td>
       <td>failed</td>
       <td>3</td>
@@ -569,7 +573,6 @@ t_df.head()
       <td>220.0</td>
       <td>220.0</td>
       <td>45000.0</td>
-      <td>44.0</td>
     </tr>
     <tr>
       <th>7</th>
@@ -578,7 +581,9 @@ t_df.head()
       <td>Drinks</td>
       <td>Food</td>
       <td>USD</td>
+      <td>2016-03-17</td>
       <td>25000.0</td>
+      <td>2016-02-01 20:05:12</td>
       <td>453.0</td>
       <td>failed</td>
       <td>40</td>
@@ -586,7 +591,6 @@ t_df.head()
       <td>453.0</td>
       <td>453.0</td>
       <td>25000.0</td>
-      <td>44.0</td>
     </tr>
     <tr>
       <th>13</th>
@@ -595,7 +599,9 @@ t_df.head()
       <td>Games</td>
       <td>Games</td>
       <td>USD</td>
+      <td>2016-03-25</td>
       <td>200000.0</td>
+      <td>2016-02-09 23:01:12</td>
       <td>0.0</td>
       <td>failed</td>
       <td>0</td>
@@ -603,7 +609,6 @@ t_df.head()
       <td>0.0</td>
       <td>0.0</td>
       <td>200000.0</td>
-      <td>44.0</td>
     </tr>
     <tr>
       <th>33</th>
@@ -612,7 +617,9 @@ t_df.head()
       <td>Public Art</td>
       <td>Art</td>
       <td>USD</td>
+      <td>2013-03-24</td>
       <td>25000.0</td>
+      <td>2013-02-12 01:07:28</td>
       <td>1395.0</td>
       <td>failed</td>
       <td>30</td>
@@ -620,7 +627,6 @@ t_df.head()
       <td>1395.0</td>
       <td>1395.0</td>
       <td>25000.0</td>
-      <td>39.0</td>
     </tr>
   </tbody>
 </table>
@@ -660,12 +666,12 @@ This gives us a good opportunity to further explore this 20.58% data from the da
 
 
 ```python
-t_df = df[(df['goal'] <= 100000) | ((df['goal'] >= 100000) & (df['state'] == 1)) ].copy()
+t_df = df[(df['goal'] <= df['goal'].std()) | ((df['goal'] >= df['goal'].std()) & (df['state'] == 1)) ].copy()
 print(t_df.shape[0])
 t_df.head()
 ```
 
-    321470
+    330801
 
 
 
@@ -694,7 +700,9 @@ t_df.head()
       <th>category</th>
       <th>main_category</th>
       <th>currency</th>
+      <th>deadline</th>
       <th>goal</th>
+      <th>launched</th>
       <th>pledged</th>
       <th>state</th>
       <th>backers</th>
@@ -702,7 +710,6 @@ t_df.head()
       <th>usd pledged</th>
       <th>usd_pledged_real</th>
       <th>usd_goal_real</th>
-      <th>duration</th>
     </tr>
   </thead>
   <tbody>
@@ -713,7 +720,9 @@ t_df.head()
       <td>Poetry</td>
       <td>Publishing</td>
       <td>GBP</td>
+      <td>2015-10-09</td>
       <td>1000.0</td>
+      <td>2015-08-11 12:12:28</td>
       <td>0.0</td>
       <td>failed</td>
       <td>0</td>
@@ -721,7 +730,6 @@ t_df.head()
       <td>0.0</td>
       <td>0.0</td>
       <td>1533.95</td>
-      <td>58.0</td>
     </tr>
     <tr>
       <th>1</th>
@@ -730,7 +738,9 @@ t_df.head()
       <td>Narrative Film</td>
       <td>Film &amp; Video</td>
       <td>USD</td>
+      <td>2017-11-01</td>
       <td>30000.0</td>
+      <td>2017-09-02 04:43:57</td>
       <td>2421.0</td>
       <td>failed</td>
       <td>15</td>
@@ -738,7 +748,6 @@ t_df.head()
       <td>100.0</td>
       <td>2421.0</td>
       <td>30000.00</td>
-      <td>59.0</td>
     </tr>
     <tr>
       <th>2</th>
@@ -747,7 +756,9 @@ t_df.head()
       <td>Narrative Film</td>
       <td>Film &amp; Video</td>
       <td>USD</td>
+      <td>2013-02-26</td>
       <td>45000.0</td>
+      <td>2013-01-12 00:20:50</td>
       <td>220.0</td>
       <td>failed</td>
       <td>3</td>
@@ -755,7 +766,6 @@ t_df.head()
       <td>220.0</td>
       <td>220.0</td>
       <td>45000.00</td>
-      <td>44.0</td>
     </tr>
     <tr>
       <th>3</th>
@@ -764,7 +774,9 @@ t_df.head()
       <td>Music</td>
       <td>Music</td>
       <td>USD</td>
+      <td>2012-04-16</td>
       <td>5000.0</td>
+      <td>2012-03-17 03:24:11</td>
       <td>1.0</td>
       <td>failed</td>
       <td>1</td>
@@ -772,7 +784,6 @@ t_df.head()
       <td>1.0</td>
       <td>1.0</td>
       <td>5000.00</td>
-      <td>29.0</td>
     </tr>
     <tr>
       <th>5</th>
@@ -781,7 +792,9 @@ t_df.head()
       <td>Restaurants</td>
       <td>Food</td>
       <td>USD</td>
+      <td>2016-04-01</td>
       <td>50000.0</td>
+      <td>2016-02-26 13:38:27</td>
       <td>52375.0</td>
       <td>successful</td>
       <td>224</td>
@@ -789,7 +802,6 @@ t_df.head()
       <td>52375.0</td>
       <td>52375.0</td>
       <td>50000.00</td>
-      <td>34.0</td>
     </tr>
   </tbody>
 </table>
@@ -802,6 +814,8 @@ Here we take all value under $100000 and only the values whcich were successful 
 
 ```python
 y = df['goal']
+mean = y.mean()
+std = y.std()
 count = 0
 for yi in y:
     zs = (yi-mean)/std
@@ -831,13 +845,14 @@ print(value)
 thresh = math.sqrt(value/(nn*value)) * (N-1)/math.sqrt(N)
 print(thresh)
 y = df['goal']
-mean = y.mean()
-std = y.std()
+
 term_factor_max = 0
 term_factor_min = 0
+mean = y.mean()
+std = y.std()
 mean_dev = abs(y-mean)
-
 for i in range(N):
+
     y_max = mean_dev.idxmax()
     y_min = mean_dev.idxmin()
     if y_max == term_factor_max and y_min == term_factor_min:
@@ -869,7 +884,7 @@ print('Detected Outliers',N-y.shape[0])
 print(1)
 ```
 
-    ('Detected Outliers', 870)
+    ('Detected Outliers', 316348)
     1
 
 
@@ -926,17 +941,104 @@ p = stats.t.cdf(value, nn)
 print(p)
 ```
 
-    (0, 1.000000000004545, 0.039583962830781444, 899, 0.039502561416815234, 22618)
-    1.0
+    /anaconda2/lib/python2.7/site-packages/ipykernel_launcher.py:13: RuntimeWarning: divide by zero encountered in double_scalars
+      del sys.path[0]
+    /anaconda2/lib/python2.7/site-packages/ipykernel_launcher.py:14: RuntimeWarning: divide by zero encountered in double_scalars
+      
+
+
+    (0, 1.000000000004545, inf, 899, inf, 22618)
+    (1, 1.000000000004545, inf, 6420, inf, 1966)
+    (2, 1.000000000004545, inf, 2096, inf, 673)
+    (3, 1.000000000004545, inf, 3301, inf, 2364)
+    (4, 1.000000000004545, inf, 146, inf, 5935)
+    (5, 1.000000000004545, inf, 694, inf, 357)
+    (6, 1.000000000004545, inf, 954, inf, 11091)
+    (7, 1.000000000004545, inf, 631, inf, 3742)
+    (8, 1.000000000004545, inf, 779, inf, 4478)
+    (9, 1.000000000004545, inf, 473, inf, 606)
+    (10, 1.000000000004545, inf, 41, inf, 14584)
+    (11, 1.000000000004545, inf, 470, inf, 15355)
+    (12, 1.000000000004545, inf, 434, inf, 8768)
+    (13, 1.000000000004545, inf, 141, inf, 31065)
+    (14, 1.000000000004545, inf, 18, inf, 11724)
+    (15, 1.000000000004545, inf, 268, inf, 20948)
+    (16, 1.000000000004545, inf, 84, inf, 8560)
+    (17, 1.000000000004545, inf, 135, inf, 6016)
+    (18, 1.000000000004545, inf, 204, inf, 4042)
+    (19, 1.000000000004545, inf, 6, inf, 1146)
+    (20, 1.000000000004545, inf, 279, inf, 3243)
+    (21, 1.000000000004545, inf, 83, inf, 747)
+    (22, 1.000000000004545, inf, 366, inf, 3014)
+    (23, 1.000000000004545, inf, 207, inf, 3085)
+    (24, 1.000000000004545, inf, 43, inf, 3485)
+    (25, 1.000000000004545, inf, 186, inf, 3965)
+    (26, 1.000000000004545, inf, 202, inf, 107)
+    (27, 1.000000000004545, inf, 14, inf, 7422)
+    (28, 1.000000000004545, inf, 55, inf, 1895)
+    (29, 1.000000000004545, inf, 3, inf, 8269)
+    (30, 1.000000000004545, inf, 31, inf, 828)
+    (31, 1.000000000004545, inf, 190, inf, 120)
+    (32, 1.000000000004545, inf, 136, inf, 1)
+    (33, 1.000000000004545, inf, 82, inf, 0)
+    (34, 1.000000000004545, inf, 5, inf, 1277)
+    (35, 1.000000000004545, inf, 111, inf, 548)
+    (36, 1.000000000004545, inf, 131, inf, 482)
+    (37, 1.000000000004545, inf, 123, inf, 176)
+    (38, 1.000000000004545, inf, 383, inf, 1112)
+    (39, 1.000000000004545, inf, 33, inf, 80)
+    (40, 1.000000000004545, inf, 49, inf, 223)
+    (41, 1.000000000004545, inf, 57, inf, 188)
+    (42, 1.000000000004545, inf, 75, inf, 335)
+    (43, 1.000000000004545, inf, 89, inf, 108)
+    (44, 1.000000000004545, inf, 2, inf, 44)
+    (45, 1.000000000004545, inf, 94, inf, 710)
+
+
+
+    ---------------------------------------------------------------------------
+
+    ValueError                                Traceback (most recent call last)
+
+    <ipython-input-15-c041af58d3d8> in <module>()
+          5 term_factor_min = 0
+          6 for i in range(N):
+    ----> 7     z_max = z.idxmax()
+          8     z_min = z.idxmin()
+          9     if z_max == term_factor_max and z_min == term_factor_min:
+
+
+    /anaconda2/lib/python2.7/site-packages/pandas/core/series.pyc in idxmax(self, axis, skipna, *args, **kwargs)
+       1781         """
+       1782         skipna = nv.validate_argmax_with_skipna(skipna, args, kwargs)
+    -> 1783         i = nanops.nanargmax(com._values_from_object(self), skipna=skipna)
+       1784         if i == -1:
+       1785             return np.nan
+
+
+    /anaconda2/lib/python2.7/site-packages/pandas/core/nanops.pyc in _f(*args, **kwargs)
+         75             try:
+         76                 with np.errstate(invalid='ignore'):
+    ---> 77                     return f(*args, **kwargs)
+         78             except ValueError as e:
+         79                 # we want to transform an object array
+
+
+    /anaconda2/lib/python2.7/site-packages/pandas/core/nanops.pyc in nanargmax(values, axis, skipna)
+        524     """
+        525     values, mask, dtype, _ = _get_values(values, skipna, fill_value_typ='-inf')
+    --> 526     result = values.argmax(axis)
+        527     result = _maybe_arg_null_out(result, axis, mask, skipna)
+        528     return result
+
+
+    ValueError: attempt to get argmax of an empty sequence
 
 
 
 ```python
 print('Detected Outliers',N-z.shape[0])
 ```
-
-    ('Detected Outliers', 0)
-
 
 We observe no outliers in duration of the goals.
 
@@ -948,13 +1050,6 @@ yy = yy[yy <= std]
 yy.head()
 N-yy.shape[0]
 ```
-
-
-
-
-    874
-
-
 
 Comparing the values of goals against standard deviation we get a similar result of that with Grubbs' Test 874 vs 870
 
@@ -968,8 +1063,5 @@ for yi in y:
         print(zs)
 print(count)
 ```
-
-    0
-
 
 Finally re-verifying it with Z-Score
