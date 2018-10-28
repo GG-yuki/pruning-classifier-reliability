@@ -17,7 +17,7 @@ data = pd.read_csv('KS_pre_process1.csv')
 # In[3]:
 
 
-columns_target = ['state'] 
+columns_target = ['state'] #setting a target column
 columns_train = ['category', 'main_category', 'currency', 'goal', 'country', 'duration_days'] 
 
 
