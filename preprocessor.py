@@ -29,7 +29,7 @@ def main():
         'successful': 1
         })
     df = df[df.goal > 0]
-    print(df.head)
+    #print(df.head)
     code = 1
     for i in df.category.unique():
         df.category.replace(i, code, inplace=True)
@@ -50,12 +50,14 @@ def main():
         df.country.replace(i, code, inplace=True)
         code += 1
 
-    print(df.head)    
+    #print(df.head)    
     pre_process_manual(df)
+    pre_process_grubbs(df)
+    pre_process_original(df)
     
 def pre_process_manual(df):
-    df = df[(df['goal'] <= 100000) & (df['goal'] >= 1000)].copy()
-    print(df.shape)
+    df = df[(df['goal'] <= 100000) | ((df['goal'] >= 100000) & (df['state'] == 1)) ].copy()
+    print('manual', df.shape)
     df.to_csv('KS_manual_pre_process.csv', sep=',', index=False)
 
 
@@ -82,21 +84,22 @@ def grubbs_test(N, df, a = 0.05):
         G2 = abs(mean_dev[y_max])/std
         if G1>thresh:
             mean_dev = mean_dev[mean_dev != mean_dev[y_min]]
-            y = y[y != y[y_min]]
+            df = df[y != y[y_min]]
         if G2>thresh:
             mean_dev = mean_dev[mean_dev != mean_dev[y_max]]
-            y = y[y != y[y_max]]
+            df = df[y != y[y_max]]
         #print(i, thresh, G1, y_min, G2, y_max)
     #p = stats.t.cdf(value, nn)
-    return y
+    return df
 
 
-def pre_process_std():
-    pass
+def pre_process_original(df):
+    df.to_csv('KS_original_pre_process.csv', sep=',', index=False)
 
 
-def pre_process_grubbs():
-    pass
+def pre_process_grubbs(df):
+    df = grubbs_test(df.shape[0], df)
+    df.to_csv('KS_grubb_pre_process.csv', sep=',', index=False)
 
 
 main()
