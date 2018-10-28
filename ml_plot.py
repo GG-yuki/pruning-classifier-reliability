@@ -21,3 +21,6 @@ print(data.shape)
 
 columns_target = ['state'] 
 columns_train = ['category', 'main_category', 'currency', 'goal', 'country', 'duration_days'] 
+
+data = data.dropna()
+#data = data[(data['goal'] <= 100000) & (data['goal'] >= 1000)].copy()
