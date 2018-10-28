@@ -39,3 +39,10 @@ OX_train, OX_test, OY_train, OY_test = train_test_split(OX,OY, test_size = 0.10,
  linear_svc = LinearSVC()
     linear_svc.fit(X_train, np.ravel(Y_train)) 
     print("Score ", linear_svc.score(OX_test, OY_test))
+
+mlp = MLPClassifier(solver='adam', 
+                        alpha=1e-5, 
+                        hidden_layer_sizes=(21, 2), 
+                        random_state=1)
+    mlp.fit(X_train, np.ravel(Y_train)) 
+    print("Score ", mlp.score(OX_test, OY_test))
