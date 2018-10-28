@@ -46,3 +46,8 @@ mlp = MLPClassifier(solver='adam',
                         random_state=1)
     mlp.fit(X_train, np.ravel(Y_train)) 
     print("Score ", mlp.score(OX_test, OY_test))
+  
+   clf = LogisticRegression()
+    clf.fit(X_train, np.ravel(Y_train)) 
+    print("Score ", clf.score(OX_test, OY_test))
+    a.append(clf.score(OX_test, OY_test))
