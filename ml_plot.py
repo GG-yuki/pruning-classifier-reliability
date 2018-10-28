@@ -58,3 +58,8 @@ print("Score ", knn.score(OX_test, OY_test))
 rfc = RandomForestClassifier(n_estimators=100, max_depth=2, random_state=0)
 rfc.fit(X_train, np.ravel(Y_train)) 
 print("Score ", rfc.score(OX_test, OY_test))
+
+
+decision_tree = DecisionTreeClassifier()
+decision_tree.fit(X_train, np.ravel(Y_train)) 
+print("Score ", decision_tree.score(OX_test, OY_test))
