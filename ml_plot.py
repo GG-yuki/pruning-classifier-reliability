@@ -18,3 +18,6 @@ data = pd.read_csv('KS_grubb_pre_processTest1.csv')
 ogdf = pd.read_csv('KS_grubb_pre_processTest1.csv') 
 print(data.shape)
 #print(data[data.goal > 100000])
+
+columns_target = ['state'] 
+columns_train = ['category', 'main_category', 'currency', 'goal', 'country', 'duration_days'] 
