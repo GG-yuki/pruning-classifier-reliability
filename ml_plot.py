@@ -63,3 +63,12 @@ print("Score ", rfc.score(OX_test, OY_test))
 decision_tree = DecisionTreeClassifier()
 decision_tree.fit(X_train, np.ravel(Y_train)) 
 print("Score ", decision_tree.score(OX_test, OY_test))
+
+
+bdt = AdaBoostClassifier(DecisionTreeClassifier(max_depth=1),
+                             algorithm="SAMME",
+                             n_estimators=200)
+
+
+bdt.fit(X_train, np.ravel(Y_train)) 
+print("Score ", bdt.score(OX_test, OY_test))
