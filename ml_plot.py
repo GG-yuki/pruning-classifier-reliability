@@ -24,3 +24,9 @@ columns_train = ['category', 'main_category', 'currency', 'goal', 'country', 'du
 
 data = data.dropna()
 #data = data[(data['goal'] <= 100000) & (data['goal'] >= 1000)].copy()
+
+X = data[columns_train] 
+Y = data[columns_target]
+
+OX = ogdf[columns_train] 
+OY = ogdf[columns_target]
