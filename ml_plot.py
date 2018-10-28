@@ -110,3 +110,10 @@ for i in range(10):
     bagging.fit(X_train, np.ravel(Y_train)) 
     print("Score ", bagging.score(OX_test, OY_test))
     a.append(bagging.score(OX_test, OY_test))
+    
+    
+print 'original array:'
+print a
+aa = np.array(a).reshape(10,8)
+
+print(aa.mean(axis=0))
