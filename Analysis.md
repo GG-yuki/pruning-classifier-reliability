@@ -468,6 +468,7 @@ y = np.sort(df.goal.values)
 ax1.plot(x, y)
 ax2.loglog(x, y)
 f.subplots_adjust(hspace=0.5)
+f.suptitle("Goals Distribution")
 plt.show()
 print('shape of data before filtering',df.shape)
 ```
@@ -479,15 +480,15 @@ print('shape of data before filtering',df.shape)
     ('shape of data before filtering', (331675, 15))
 
 
-Here we observe a sudden growth in the goal beyond 75% shooting up exponentially. We need to further check the details of goals above $15000 as there can possibly be high volume of unrealistic goals.
+Here we observe a sudden growth in the goal beyond 10^6 shooting up exponentially. We need to further check the details of goals above standard deviation as there can possibly be high volume of unrealistic goals.
 
 
 ```python
 before = df.shape[0]
 print('shape of data before filtering',before)
-t_df = df[df.goal >= 15000.0]
+t_df = df[df.goal >= df['goal'].std()]
 after_goal = t_df.shape[0]
-print('shape of data after filtering for goals beyond $15000',after_goal)
+print('shape of data after filtering for goals beyond $1117916.69',after_goal)
 t_df = t_df[t_df.state != 'successful']
 after_state = t_df.shape[0]
 print('shape of data after filtering out all success',after_state)
@@ -495,8 +496,8 @@ t_df.head()
 ```
 
     ('shape of data before filtering', 331675)
-    ('shape of data after filtering for goals beyond $15000', 91805)
-    ('shape of data after filtering out all success', 68260)
+    ('shape of data after filtering for goals beyond $1117916.69', 874)
+    ('shape of data after filtering out all success', 862)
 
 
 
@@ -539,94 +540,94 @@ t_df.head()
   </thead>
   <tbody>
     <tr>
-      <th>1</th>
-      <td>1000003930</td>
-      <td>Greeting From Earth: ZGAC Arts Capsule For ET</td>
-      <td>Narrative Film</td>
+      <th>528</th>
+      <td>1002538085</td>
+      <td>Green Lizzie: The only container truly adapted...</td>
+      <td>Product Design</td>
+      <td>Design</td>
+      <td>SEK</td>
+      <td>2017-03-25</td>
+      <td>1700000.0</td>
+      <td>2017-02-24 09:06:26</td>
+      <td>40835.0</td>
+      <td>failed</td>
+      <td>34</td>
+      <td>SE</td>
+      <td>761.14</td>
+      <td>4579.92</td>
+      <td>190666.32</td>
+    </tr>
+    <tr>
+      <th>971</th>
+      <td>1004941506</td>
+      <td>Maori MBT Awareness Centre</td>
+      <td>Web</td>
+      <td>Journalism</td>
+      <td>CAD</td>
+      <td>2017-10-18</td>
+      <td>2000000.0</td>
+      <td>2017-08-19 22:13:55</td>
+      <td>2242.0</td>
+      <td>failed</td>
+      <td>19</td>
+      <td>CA</td>
+      <td>1160.67</td>
+      <td>1794.46</td>
+      <td>1600768.37</td>
+    </tr>
+    <tr>
+      <th>1042</th>
+      <td>1005237669</td>
+      <td>The Old Soul of a Lion</td>
+      <td>Film &amp; Video</td>
       <td>Film &amp; Video</td>
       <td>USD</td>
-      <td>2017-11-01</td>
-      <td>30000.0</td>
-      <td>2017-09-02 04:43:57</td>
-      <td>2421.0</td>
+      <td>2014-10-14</td>
+      <td>3000000.0</td>
+      <td>2014-08-15 20:16:22</td>
+      <td>4.0</td>
       <td>failed</td>
-      <td>15</td>
+      <td>2</td>
       <td>US</td>
-      <td>100.0</td>
-      <td>2421.0</td>
-      <td>30000.0</td>
+      <td>4.00</td>
+      <td>4.00</td>
+      <td>3000000.00</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>1000004038</td>
-      <td>Where is Hank?</td>
-      <td>Narrative Film</td>
-      <td>Film &amp; Video</td>
-      <td>USD</td>
-      <td>2013-02-26</td>
-      <td>45000.0</td>
-      <td>2013-01-12 00:20:50</td>
-      <td>220.0</td>
+      <th>1415</th>
+      <td>1007217653</td>
+      <td>QUIUBO</td>
+      <td>Sound</td>
+      <td>Technology</td>
+      <td>MXN</td>
+      <td>2017-11-13</td>
+      <td>2400000.0</td>
+      <td>2017-10-01 19:39:35</td>
+      <td>27296.0</td>
       <td>failed</td>
-      <td>3</td>
-      <td>US</td>
-      <td>220.0</td>
-      <td>220.0</td>
-      <td>45000.0</td>
+      <td>24</td>
+      <td>MX</td>
+      <td>442.58</td>
+      <td>1433.46</td>
+      <td>126037.18</td>
     </tr>
     <tr>
-      <th>7</th>
-      <td>1000030581</td>
-      <td>Chaser Strips. Our Strips make Shots their B*tch!</td>
-      <td>Drinks</td>
-      <td>Food</td>
-      <td>USD</td>
-      <td>2016-03-17</td>
-      <td>25000.0</td>
-      <td>2016-02-01 20:05:12</td>
-      <td>453.0</td>
+      <th>1795</th>
+      <td>1009207145</td>
+      <td>** GOLIATH **</td>
+      <td>Product Design</td>
+      <td>Design</td>
+      <td>CAD</td>
+      <td>2014-07-21</td>
+      <td>3850000.0</td>
+      <td>2014-06-21 22:34:21</td>
+      <td>285.0</td>
       <td>failed</td>
-      <td>40</td>
-      <td>US</td>
-      <td>453.0</td>
-      <td>453.0</td>
-      <td>25000.0</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>1000056157</td>
-      <td>G-Spot Place for Gamers to connect with eachot...</td>
-      <td>Games</td>
-      <td>Games</td>
-      <td>USD</td>
-      <td>2016-03-25</td>
-      <td>200000.0</td>
-      <td>2016-02-09 23:01:12</td>
-      <td>0.0</td>
-      <td>failed</td>
-      <td>0</td>
-      <td>US</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>200000.0</td>
-    </tr>
-    <tr>
-      <th>33</th>
-      <td>1000120287</td>
-      <td>BB130A</td>
-      <td>Public Art</td>
-      <td>Art</td>
-      <td>USD</td>
-      <td>2013-03-24</td>
-      <td>25000.0</td>
-      <td>2013-02-12 01:07:28</td>
-      <td>1395.0</td>
-      <td>failed</td>
-      <td>30</td>
-      <td>US</td>
-      <td>1395.0</td>
-      <td>1395.0</td>
-      <td>25000.0</td>
+      <td>5</td>
+      <td>CA</td>
+      <td>263.41</td>
+      <td>264.67</td>
+      <td>3575408.62</td>
     </tr>
   </tbody>
 </table>
@@ -637,32 +638,35 @@ t_df.head()
 
 ```python
 total = 100.0
-after_state_bar = after_state * total/before
-after_goal_bar = after_goal * total/before
+# todo print actual percentage and remove log10
+after_state_bar = (after_state * total/before)
+after_goal_bar = (after_goal * total/before)
 p0 = plt.bar([0], after_state_bar)
-p1 = plt.bar([0], after_goal_bar,bottom=after_state_bar)
-total = 100
-p2 = plt.bar([0], total, bottom=after_goal_bar)
+p1 = plt.bar([0], after_goal_bar-after_state_bar,bottom=after_state_bar)
+total = after_goal_bar
+#p2 = plt.bar([0], total, bottom=after_goal_bar-after_state_bar)
 
-plt.title('')
-plt.ylabel('Scores')
-plt.xlabel('DataCount')
+plt.title('Data to Prune')
+plt.ylabel('Data Volume above std')
+plt.xlabel('Goals')
 plt.xticks([0], (''))
-plt.yticks(np.arange(0, total+0.1, 10))
-plt.legend((p0[0], p1[0], p2[0]), ('Failure', '<$15000', 'Clean Total'))
+plt.yticks(np.arange(0, total+0.1, 0.1))
+plt.legend((p0[0], p1[0]), ('Failed > std', 'goals > std'))
 plt.show()
-print(after_state_bar,after_goal_bar)
+print((after_state_bar/after_goal_bar)*100.0)
+print(after_state_bar, after_goal_bar)
 ```
 
 
 ![png](output_12_0.png)
 
 
-    (20.580387427451573, 27.679204040099496)
+    98.6270022883
+    (0.25989296751337904, 0.26351096706112914)
 
 
-As we observe with the stacked bar chart, about 21% of all goals which are above $15000 failed.
-This gives us a good opportunity to further explore this 20.58% data from the data set for pruning to run our classification algorithm.
+As we observe with the stacked bar chart, about 98.62% of all goals which are above $1117916.69 failed.
+This gives us a good opportunity to further explore this 0.259% data from the data set for pruning to run our classification algorithm.
 
 
 ```python
@@ -809,7 +813,7 @@ t_df.head()
 
 
 
-Here we take all value under $100000 and only the values whcich were successful above $100000, would make the data suboptimal according to our assumtions.
+Here we take all value under $1117916.69 and only the values whcich were successful above $1117916.69, would make the data suboptimal according to our assumtions.
 
 
 ```python
@@ -881,11 +885,11 @@ print(p)
 
 ```python
 print('Detected Outliers',N-y.shape[0])
-print(1)
+print(y.shape[0])
 ```
 
-    ('Detected Outliers', 316348)
-    1
+    ('Detected Outliers', 870)
+    330805
 
 
 Looking into the duration of goals:
@@ -936,109 +940,21 @@ for i in range(N):
         z = z[z != z[z_min]]
     if G2>thresh:
         z = z[z != z[z_max]]
-    print(i, thresh, G1, z_min, G2, z_max)
+    #print(i, thresh, G1, z_min, G2, z_max)
 p = stats.t.cdf(value, nn)
 print(p)
 ```
 
-    /anaconda2/lib/python2.7/site-packages/ipykernel_launcher.py:13: RuntimeWarning: divide by zero encountered in double_scalars
-      del sys.path[0]
-    /anaconda2/lib/python2.7/site-packages/ipykernel_launcher.py:14: RuntimeWarning: divide by zero encountered in double_scalars
-      
-
-
-    (0, 1.000000000004545, inf, 899, inf, 22618)
-    (1, 1.000000000004545, inf, 6420, inf, 1966)
-    (2, 1.000000000004545, inf, 2096, inf, 673)
-    (3, 1.000000000004545, inf, 3301, inf, 2364)
-    (4, 1.000000000004545, inf, 146, inf, 5935)
-    (5, 1.000000000004545, inf, 694, inf, 357)
-    (6, 1.000000000004545, inf, 954, inf, 11091)
-    (7, 1.000000000004545, inf, 631, inf, 3742)
-    (8, 1.000000000004545, inf, 779, inf, 4478)
-    (9, 1.000000000004545, inf, 473, inf, 606)
-    (10, 1.000000000004545, inf, 41, inf, 14584)
-    (11, 1.000000000004545, inf, 470, inf, 15355)
-    (12, 1.000000000004545, inf, 434, inf, 8768)
-    (13, 1.000000000004545, inf, 141, inf, 31065)
-    (14, 1.000000000004545, inf, 18, inf, 11724)
-    (15, 1.000000000004545, inf, 268, inf, 20948)
-    (16, 1.000000000004545, inf, 84, inf, 8560)
-    (17, 1.000000000004545, inf, 135, inf, 6016)
-    (18, 1.000000000004545, inf, 204, inf, 4042)
-    (19, 1.000000000004545, inf, 6, inf, 1146)
-    (20, 1.000000000004545, inf, 279, inf, 3243)
-    (21, 1.000000000004545, inf, 83, inf, 747)
-    (22, 1.000000000004545, inf, 366, inf, 3014)
-    (23, 1.000000000004545, inf, 207, inf, 3085)
-    (24, 1.000000000004545, inf, 43, inf, 3485)
-    (25, 1.000000000004545, inf, 186, inf, 3965)
-    (26, 1.000000000004545, inf, 202, inf, 107)
-    (27, 1.000000000004545, inf, 14, inf, 7422)
-    (28, 1.000000000004545, inf, 55, inf, 1895)
-    (29, 1.000000000004545, inf, 3, inf, 8269)
-    (30, 1.000000000004545, inf, 31, inf, 828)
-    (31, 1.000000000004545, inf, 190, inf, 120)
-    (32, 1.000000000004545, inf, 136, inf, 1)
-    (33, 1.000000000004545, inf, 82, inf, 0)
-    (34, 1.000000000004545, inf, 5, inf, 1277)
-    (35, 1.000000000004545, inf, 111, inf, 548)
-    (36, 1.000000000004545, inf, 131, inf, 482)
-    (37, 1.000000000004545, inf, 123, inf, 176)
-    (38, 1.000000000004545, inf, 383, inf, 1112)
-    (39, 1.000000000004545, inf, 33, inf, 80)
-    (40, 1.000000000004545, inf, 49, inf, 223)
-    (41, 1.000000000004545, inf, 57, inf, 188)
-    (42, 1.000000000004545, inf, 75, inf, 335)
-    (43, 1.000000000004545, inf, 89, inf, 108)
-    (44, 1.000000000004545, inf, 2, inf, 44)
-    (45, 1.000000000004545, inf, 94, inf, 710)
-
-
-
-    ---------------------------------------------------------------------------
-
-    ValueError                                Traceback (most recent call last)
-
-    <ipython-input-15-c041af58d3d8> in <module>()
-          5 term_factor_min = 0
-          6 for i in range(N):
-    ----> 7     z_max = z.idxmax()
-          8     z_min = z.idxmin()
-          9     if z_max == term_factor_max and z_min == term_factor_min:
-
-
-    /anaconda2/lib/python2.7/site-packages/pandas/core/series.pyc in idxmax(self, axis, skipna, *args, **kwargs)
-       1781         """
-       1782         skipna = nv.validate_argmax_with_skipna(skipna, args, kwargs)
-    -> 1783         i = nanops.nanargmax(com._values_from_object(self), skipna=skipna)
-       1784         if i == -1:
-       1785             return np.nan
-
-
-    /anaconda2/lib/python2.7/site-packages/pandas/core/nanops.pyc in _f(*args, **kwargs)
-         75             try:
-         76                 with np.errstate(invalid='ignore'):
-    ---> 77                     return f(*args, **kwargs)
-         78             except ValueError as e:
-         79                 # we want to transform an object array
-
-
-    /anaconda2/lib/python2.7/site-packages/pandas/core/nanops.pyc in nanargmax(values, axis, skipna)
-        524     """
-        525     values, mask, dtype, _ = _get_values(values, skipna, fill_value_typ='-inf')
-    --> 526     result = values.argmax(axis)
-        527     result = _maybe_arg_null_out(result, axis, mask, skipna)
-        528     return result
-
-
-    ValueError: attempt to get argmax of an empty sequence
+    1.0
 
 
 
 ```python
 print('Detected Outliers',N-z.shape[0])
 ```
+
+    ('Detected Outliers', 0)
+
 
 We observe no outliers in duration of the goals.
 
@@ -1050,6 +966,13 @@ yy = yy[yy <= std]
 yy.head()
 N-yy.shape[0]
 ```
+
+
+
+
+    874
+
+
 
 Comparing the values of goals against standard deviation we get a similar result of that with Grubbs' Test 874 vs 870
 
@@ -1063,5 +986,8 @@ for yi in y:
         print(zs)
 print(count)
 ```
+
+    0
+
 
 Finally re-verifying it with Z-Score
