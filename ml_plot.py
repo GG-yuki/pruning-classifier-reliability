@@ -30,3 +30,7 @@ Y = data[columns_target]
 
 OX = ogdf[columns_train] 
 OY = ogdf[columns_target]
+
+from sklearn.model_selection import train_test_split 
+X_train, X_test, Y_train, Y_test = train_test_split(X,Y, test_size = 0.10, random_state = 42) 
+OX_train, OX_test, OY_train, OY_test = train_test_split(OX,OY, test_size = 0.10, random_state = 42) 
