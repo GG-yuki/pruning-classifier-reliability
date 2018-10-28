@@ -56,7 +56,7 @@ def main():
     pre_process_original(df)
     
 def pre_process_manual(df):
-    df = df[(df['goal'] <= 100000) | ((df['goal'] >= 100000) & (df['state'] == 1)) ].copy()
+    df = df[(df['goal'] <= df['goal'].std()) | ((df['goal'] >= df['goal'].std()) & (df['state'] == 1)) ].copy()
     print('manual', df.shape)
     df.to_csv('KS_manual_pre_process.csv', sep=',', index=False)
 
