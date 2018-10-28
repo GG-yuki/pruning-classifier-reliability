@@ -34,3 +34,8 @@ OY = ogdf[columns_target]
 from sklearn.model_selection import train_test_split 
 X_train, X_test, Y_train, Y_test = train_test_split(X,Y, test_size = 0.10, random_state = 42) 
 OX_train, OX_test, OY_train, OY_test = train_test_split(OX,OY, test_size = 0.10, random_state = 42) 
+
+
+ linear_svc = LinearSVC()
+    linear_svc.fit(X_train, np.ravel(Y_train)) 
+    print("Score ", linear_svc.score(OX_test, OY_test))
