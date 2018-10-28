@@ -661,18 +661,31 @@ print(after_state_bar,after_goal_bar)
     (20.580387427451573, 27.679204040099496)
 
 
-As we observe with the stacked bar chart, about 21% of all goals which are above $15000 failed.
-This gives us a good opportunity to further explore this 20.58% data from the data set for pruning to run our classification algorithm.
 
-We apply Two-Sided Grubb's Test to remove Outliers
+```python
+y = df['goal']
+count = 0
+for yi in y:
+    zs = (yi-mean)/std
+    if zs>1:
+        count += 1
+        #print(zs)
+print(count)
+```
+
+    870
+
 
 
 ```python
 #t_test = stats.ttest_1samp(t_df['goal'],df['goal'].mean())
 import math
+r_max = []
+r_val = []
+r_index = []
 a = 0.05
 N = before
-p = a/(N)
+p = 1-(a/(2*N))
 nn = N-2
 value = stats.t.ppf(p, nn)
 print(value)
@@ -685,37 +698,50 @@ mean = y.mean()
 std = y.std()
 term_factor_max = 0
 term_factor_min = 0
+mean_dev = abs(y-mean)
+
 for i in range(N):
-    y_max = y.idxmax()
-    y_min = y.idxmin()
+    y_max = mean_dev.idxmax()
+    y_min = mean_dev.idxmin()
     if y_max == term_factor_max and y_min == term_factor_min:
         break
     term_factor_max = y_max
     term_factor_min = y_min
-    G1 = abs(y[y_min]-mean/std)
-    G2 = abs(y[y_max]-mean)/std
+    G1 = abs(mean_dev[y_min])/std
+    G2 = abs(mean_dev[y_max])/std
+    r_max.append(G2)
+    r_val.append(mean_dev[y_max])
+    r_index.append(y_max)
     if G1>thresh:
+        mean_dev = mean_dev[mean_dev != mean_dev[y_min]]
         y = y[y != y[y_min]]
     if G2>thresh:
+        mean_dev = mean_dev[mean_dev != mean_dev[y_max]]
         y = y[y != y[y_max]]
     #print(i, thresh, G1, y_min, G2, y_max)
 p = stats.t.cdf(value, nn)
 print(p)
-
 ```
 
-    -5.122612139579485
-    26.24115513256711
+    5.2517542379978615
+    27.580922576328497
     1.0
     1.0
 
+
+As we observe with the stacked bar chart, about 21% of all goals which are above $15000 failed.
+This gives us a good opportunity to further explore this 20.58% data from the data set for pruning to run our classification algorithm.
+
+We apply Two-Sided Grubb's Test to remove Outliers
 
 
 ```python
 print('Detected Outliers',N-y.shape[0])
+print(1)
 ```
 
     ('Detected Outliers', 870)
+    1
 
 
 Looking into the duration of goals:
@@ -760,7 +786,7 @@ for i in range(N):
         break
     term_factor_max = z_max
     term_factor_min = z_min
-    G1 = abs(z[z_min]-mean/std)
+    G1 = abs(z[z_min]-mean)/std
     G2 = abs(z[z_max]-mean)/std
     if G1>thresh:
         z = z[z != z[z_min]]
@@ -771,7 +797,7 @@ p = stats.t.cdf(value, nn)
 print(p)
 ```
 
-    (0, 1.0000000000045453, 0.039583962830781444, 899, 0.039502561416815234, 22618)
+    (0, 1.000000000004545, 0.039583962830781444, 899, 0.039502561416815234, 22618)
     1.0
 
 
@@ -787,11 +813,11 @@ We observe no outliers in duration of the goals.
 
 
 ```python
-y = df['goal']
-std = y.std()
-y = y[y <= std]
-y.head()
-N-y.shape[0]
+yy = df['goal']
+std = yy.std()
+yy = yy[yy <= std]
+yy.head()
+N-yy.shape[0]
 ```
 
 
@@ -802,3 +828,19 @@ N-y.shape[0]
 
 
 Comparing the values of goals against standard deviation we get a similar result of that with Grubbs' Test 874 vs 870
+
+
+```python
+count = 0
+for yi in y:
+    zs = (yi-mean)/std
+    if zs>1:
+        count += 1
+        print(zs)
+print(count)
+```
+
+    0
+
+
+Finally re-verifying it with Z-Score
