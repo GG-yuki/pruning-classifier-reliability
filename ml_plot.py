@@ -10,3 +10,8 @@ from sklearn.ensemble import BaggingClassifier
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.svm import SVC, LinearSVC
 from sklearn.neural_network import MLPClassifier
+
+#data = pd.read_csv('KS_original_pre_process.csv')
+#data = pd.read_csv('KS_manual_pre_process.csv')
+data = pd.read_csv('KS_grubb_pre_processTest1.csv')
+
