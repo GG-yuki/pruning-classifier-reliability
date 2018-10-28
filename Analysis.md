@@ -525,9 +525,7 @@ t_df.head()
       <th>category</th>
       <th>main_category</th>
       <th>currency</th>
-      <th>deadline</th>
       <th>goal</th>
-      <th>launched</th>
       <th>pledged</th>
       <th>state</th>
       <th>backers</th>
@@ -535,6 +533,7 @@ t_df.head()
       <th>usd pledged</th>
       <th>usd_pledged_real</th>
       <th>usd_goal_real</th>
+      <th>duration</th>
     </tr>
   </thead>
   <tbody>
@@ -545,9 +544,7 @@ t_df.head()
       <td>Narrative Film</td>
       <td>Film &amp; Video</td>
       <td>USD</td>
-      <td>2017-11-01</td>
       <td>30000.0</td>
-      <td>2017-09-02 04:43:57</td>
       <td>2421.0</td>
       <td>failed</td>
       <td>15</td>
@@ -555,6 +552,7 @@ t_df.head()
       <td>100.0</td>
       <td>2421.0</td>
       <td>30000.0</td>
+      <td>59.0</td>
     </tr>
     <tr>
       <th>2</th>
@@ -563,9 +561,7 @@ t_df.head()
       <td>Narrative Film</td>
       <td>Film &amp; Video</td>
       <td>USD</td>
-      <td>2013-02-26</td>
       <td>45000.0</td>
-      <td>2013-01-12 00:20:50</td>
       <td>220.0</td>
       <td>failed</td>
       <td>3</td>
@@ -573,6 +569,7 @@ t_df.head()
       <td>220.0</td>
       <td>220.0</td>
       <td>45000.0</td>
+      <td>44.0</td>
     </tr>
     <tr>
       <th>7</th>
@@ -581,9 +578,7 @@ t_df.head()
       <td>Drinks</td>
       <td>Food</td>
       <td>USD</td>
-      <td>2016-03-17</td>
       <td>25000.0</td>
-      <td>2016-02-01 20:05:12</td>
       <td>453.0</td>
       <td>failed</td>
       <td>40</td>
@@ -591,6 +586,7 @@ t_df.head()
       <td>453.0</td>
       <td>453.0</td>
       <td>25000.0</td>
+      <td>44.0</td>
     </tr>
     <tr>
       <th>13</th>
@@ -599,9 +595,7 @@ t_df.head()
       <td>Games</td>
       <td>Games</td>
       <td>USD</td>
-      <td>2016-03-25</td>
       <td>200000.0</td>
-      <td>2016-02-09 23:01:12</td>
       <td>0.0</td>
       <td>failed</td>
       <td>0</td>
@@ -609,6 +603,7 @@ t_df.head()
       <td>0.0</td>
       <td>0.0</td>
       <td>200000.0</td>
+      <td>44.0</td>
     </tr>
     <tr>
       <th>33</th>
@@ -617,9 +612,7 @@ t_df.head()
       <td>Public Art</td>
       <td>Art</td>
       <td>USD</td>
-      <td>2013-03-24</td>
       <td>25000.0</td>
-      <td>2013-02-12 01:07:28</td>
       <td>1395.0</td>
       <td>failed</td>
       <td>30</td>
@@ -627,6 +620,7 @@ t_df.head()
       <td>1395.0</td>
       <td>1395.0</td>
       <td>25000.0</td>
+      <td>39.0</td>
     </tr>
   </tbody>
 </table>
@@ -661,6 +655,150 @@ print(after_state_bar,after_goal_bar)
     (20.580387427451573, 27.679204040099496)
 
 
+As we observe with the stacked bar chart, about 21% of all goals which are above $15000 failed.
+This gives us a good opportunity to further explore this 20.58% data from the data set for pruning to run our classification algorithm.
+
+
+```python
+t_df = df[(df['goal'] <= 100000) | ((df['goal'] >= 100000) & (df['state'] == 1)) ].copy()
+print(t_df.shape[0])
+t_df.head()
+```
+
+    321470
+
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>name</th>
+      <th>category</th>
+      <th>main_category</th>
+      <th>currency</th>
+      <th>goal</th>
+      <th>pledged</th>
+      <th>state</th>
+      <th>backers</th>
+      <th>country</th>
+      <th>usd pledged</th>
+      <th>usd_pledged_real</th>
+      <th>usd_goal_real</th>
+      <th>duration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1000002330</td>
+      <td>The Songs of Adelaide &amp; Abullah</td>
+      <td>Poetry</td>
+      <td>Publishing</td>
+      <td>GBP</td>
+      <td>1000.0</td>
+      <td>0.0</td>
+      <td>failed</td>
+      <td>0</td>
+      <td>GB</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1533.95</td>
+      <td>58.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1000003930</td>
+      <td>Greeting From Earth: ZGAC Arts Capsule For ET</td>
+      <td>Narrative Film</td>
+      <td>Film &amp; Video</td>
+      <td>USD</td>
+      <td>30000.0</td>
+      <td>2421.0</td>
+      <td>failed</td>
+      <td>15</td>
+      <td>US</td>
+      <td>100.0</td>
+      <td>2421.0</td>
+      <td>30000.00</td>
+      <td>59.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1000004038</td>
+      <td>Where is Hank?</td>
+      <td>Narrative Film</td>
+      <td>Film &amp; Video</td>
+      <td>USD</td>
+      <td>45000.0</td>
+      <td>220.0</td>
+      <td>failed</td>
+      <td>3</td>
+      <td>US</td>
+      <td>220.0</td>
+      <td>220.0</td>
+      <td>45000.00</td>
+      <td>44.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1000007540</td>
+      <td>ToshiCapital Rekordz Needs Help to Complete Album</td>
+      <td>Music</td>
+      <td>Music</td>
+      <td>USD</td>
+      <td>5000.0</td>
+      <td>1.0</td>
+      <td>failed</td>
+      <td>1</td>
+      <td>US</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>5000.00</td>
+      <td>29.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1000014025</td>
+      <td>Monarch Espresso Bar</td>
+      <td>Restaurants</td>
+      <td>Food</td>
+      <td>USD</td>
+      <td>50000.0</td>
+      <td>52375.0</td>
+      <td>successful</td>
+      <td>224</td>
+      <td>US</td>
+      <td>52375.0</td>
+      <td>52375.0</td>
+      <td>50000.00</td>
+      <td>34.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+Here we take all value under $100000 and only the values whcich were successful above $100000, would make the data suboptimal according to our assumtions.
+
 
 ```python
 y = df['goal']
@@ -676,13 +814,12 @@ print(count)
     870
 
 
+We apply Two-Sided Grubb's Test to remove Outliers
+
 
 ```python
 #t_test = stats.ttest_1samp(t_df['goal'],df['goal'].mean())
 import math
-r_max = []
-r_val = []
-r_index = []
 a = 0.05
 N = before
 p = 1-(a/(2*N))
@@ -709,9 +846,6 @@ for i in range(N):
     term_factor_min = y_min
     G1 = abs(mean_dev[y_min])/std
     G2 = abs(mean_dev[y_max])/std
-    r_max.append(G2)
-    r_val.append(mean_dev[y_max])
-    r_index.append(y_max)
     if G1>thresh:
         mean_dev = mean_dev[mean_dev != mean_dev[y_min]]
         y = y[y != y[y_min]]
@@ -728,11 +862,6 @@ print(p)
     1.0
     1.0
 
-
-As we observe with the stacked bar chart, about 21% of all goals which are above $15000 failed.
-This gives us a good opportunity to further explore this 20.58% data from the data set for pruning to run our classification algorithm.
-
-We apply Two-Sided Grubb's Test to remove Outliers
 
 
 ```python
