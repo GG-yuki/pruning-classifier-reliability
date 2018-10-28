@@ -72,3 +72,16 @@ bdt = AdaBoostClassifier(DecisionTreeClassifier(max_depth=1),
 
 bdt.fit(X_train, np.ravel(Y_train)) 
 print("Score ", bdt.score(OX_test, OY_test))
+
+
+bagging = BaggingClassifier(
+        neighbors.KNeighborsClassifier(
+            n_neighbors=8,
+            weights='distance'
+            ),
+        oob_score=True,
+        max_samples=0.5,
+        max_features=1.0
+        )
+bagging.fit(X_train, np.ravel(Y_train)) 
+print("Score ", bagging.score(OX_test, OY_test))
