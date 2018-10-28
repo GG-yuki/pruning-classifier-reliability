@@ -769,7 +769,6 @@ for i in range(N):
     print(i, thresh, G1, z_min, G2, z_max)
 p = stats.t.cdf(value, nn)
 print(p)
-
 ```
 
     (0, 1.0000000000045453, 0.039583962830781444, 899, 0.039502561416815234, 22618)
@@ -785,3 +784,21 @@ print('Detected Outliers',N-z.shape[0])
 
 
 We observe no outliers in duration of the goals.
+
+
+```python
+y = df['goal']
+std = y.std()
+y = y[y <= std]
+y.head()
+N-y.shape[0]
+```
+
+
+
+
+    874
+
+
+
+Comparing the values of goals against standard deviation we get a similar result of that with Grubbs' Test 874 vs 870
