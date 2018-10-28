@@ -39,5 +39,5 @@ print(clf)
 from sklearn.metrics import accuracy_score
 fit = clf.fit(X_train, np.ravel(Y_train)) 
 y_pred = clf.predict(X_test) 
-print("LogisticRegression ", accuracy_score(Y_test, y_pred))
+print("LogisticRegression: ", accuracy_score(Y_test, y_pred))
 
