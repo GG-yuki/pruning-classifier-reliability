@@ -1,1 +1,4 @@
-Machine Learning Dataset Pruning
+Classifier Reliability by Pruning Data using Statistical Hypothesis.
+
+Introduction
+For the past few decades, understanding the importance of data has played a key role; how it could potentially benefit an outcome when certain direction has been provided to it.  This took an exponential surge when Machine Learning was introduced. Too much data risks overfitting and a data too small might not capture important  information. Data pruning defines, elimination of certain unwanted data to observe an improvement in learning performance. In this paper, we use various classification algorithms, to observe the effect of data pruning on the accuracy of these classifiers. Certain statistical measures such as Z-Score and Grubbs’ Test are used to identify outliers to validate our hypothesis and reduce the anomaly in the dataset. This reduces the complexity of the given dataset resulting in an increase in accuracy and performance. 
