@@ -3,18 +3,21 @@ import numpy as np
 from scipy import stats
 import math
 
-
+'''Main function'''
 def main():
-    df = pd.read_csv('KS.csv')
+    df = pd.read_csv('KS.csv')      # read raw CSV
     print(df.shape)
+    # drop all observations which aren't successful or failed
     df = df[df.state != 'canceled']
     df = df[df.state != 'undefined']
     df = df[df.state != 'suspended']
     df = df[df.state != 'live']
+    # convert launch and deadline dates to duration
     df['launched'] = pd.to_datetime(df['launched'])
     df['deadline'] = pd.to_datetime(df['deadline'])
     df['duration_days'] = df['deadline'].subtract(df['launched'])
     df['duration_days'] = df['duration_days'].astype('timedelta64[D]')
+    # drop values which aren't directly related as an objective of a project
     df = df.drop('launched', 1)
     df = df.drop('deadline', 1)
     df = df.drop('ID', 1)
@@ -24,12 +27,14 @@ def main():
     df = df.drop('usd pledged', 1)
     df = df.drop('usd_pledged_real', 1)
     df = df.drop('usd_goal_real', 1)
+    # encode success and failure as 1 and 0 respectively
     df['state'] = df['state'].map({
         'failed': 0,
         'successful': 1
         })
     df = df[df.goal > 0]
     #print(df.head)
+    # encoding string values to numeric values
     code = 1
     for i in df.category.unique():
         df.category.replace(i, code, inplace=True)
@@ -55,12 +60,14 @@ def main():
     pre_process_grubbs(df)
     pre_process_original(df)
     
+''' Prune and create CSV based on Hypothesis'''
 def pre_process_manual(df):
     df = df[(df['goal'] <= df['goal'].std()) | ((df['goal'] >= df['goal'].std()) & (df['state'] == 1)) ].copy()
     print('manual', df.shape)
     df.to_csv('KS_manual_pre_process.csv', sep=',', index=False)
 
 
+''' Grubbs-Test algorithm'''
 def grubbs_test(N, df, a = 0.05): 
     p = 1-(a/(2*N))
     nn = N-2
@@ -92,14 +99,16 @@ def grubbs_test(N, df, a = 0.05):
     #p = stats.t.cdf(value, nn)
     return df
 
-
+''' Create Original CSV with clean variables'''
 def pre_process_original(df):
     df.to_csv('KS_original_pre_process.csv', sep=',', index=False)
 
 
+''' Prune and create CSV based on Grubbs-Test outlier detection'''
 def pre_process_grubbs(df):
     df = grubbs_test(df.shape[0], df)
     df.to_csv('KS_grubb_pre_process.csv', sep=',', index=False)
 
 
+''' Main entry point'''
 main()
