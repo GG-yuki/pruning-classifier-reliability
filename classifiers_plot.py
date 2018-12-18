@@ -12,7 +12,6 @@ from sklearn.neural_network import MLPClassifier
 import matplotlib.pyplot as plt
 import xgboost as xgb
 
-#data = pd.read_csv('KS_original_pre_process.csv')
 #data = pd.read_csv('KS_manual_pre_process.csv')
 data = pd.read_csv('F18_pass_accuracy_grubb.csv')
 ogdf = pd.read_csv('F18_stats_og.csv')
