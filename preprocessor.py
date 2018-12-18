@@ -5,61 +5,29 @@ import math
 
 '''Main function'''
 def main():
-    df = pd.read_csv('KS.csv')      # read raw CSV
+    df = pd.read_csv('FIFA_2018_Statistics.csv')      # read raw CSV
     print(df.shape)
     # drop all observations which aren't successful or failed
-    df = df[df.state != 'canceled']
-    df = df[df.state != 'undefined']
-    df = df[df.state != 'suspended']
-    df = df[df.state != 'live']
-    # convert launch and deadline dates to duration
-    df['launched'] = pd.to_datetime(df['launched'])
-    df['deadline'] = pd.to_datetime(df['deadline'])
-    df['duration_days'] = df['deadline'].subtract(df['launched'])
-    df['duration_days'] = df['duration_days'].astype('timedelta64[D]')
-    # drop values which aren't directly related as an objective of a project
-    df = df.drop('launched', 1)
-    df = df.drop('deadline', 1)
-    df = df.drop('ID', 1)
-    df = df.drop('name', 1)
-    df = df.drop('pledged', 1)
-    df = df.drop('backers', 1)
-    df = df.drop('usd pledged', 1)
-    df = df.drop('usd_pledged_real', 1)
-    df = df.drop('usd_goal_real', 1)
-    # encode success and failure as 1 and 0 respectively
-    df['state'] = df['state'].map({
-        'failed': 0,
-        'successful': 1
-        })
-    df = df[df.goal > 0]
-    #print(df.head)
-    # encoding string values to numeric values
-    code = 1
-    for i in df.category.unique():
-        df.category.replace(i, code, inplace=True)
-        code += 1
+    #dropset = ['Free Kicks','1st Goal','index','Date','Saves', 'Red','Own goal Time', 'Own goals','Goals in PSO','PSO','Round', 'Yellow & Red', 'Yellow Card', 'Fouls Committed', 'Distance Covered (Kms)','Offsides','Blocked']
+    #data = df.drop(dropset,axis=1)
+    y = boxplot_outlier(df, 'Goal Scored')
+    print(y)
 
-    code = 1
-    for i in df.main_category.unique():
-        df.main_category.replace(i, code, inplace=True)
-        code += 1
-    
-    code = 1
-    for i in df.currency.unique():
-        df.currency.replace(i, code, inplace=True)
-        code += 1
-    
-    code = 1
-    for i in df.country.unique():
-        df.country.replace(i, code, inplace=True)
-        code += 1
 
-    #print(df.head)    
+
+    '''
+
     pre_process_manual(df)
     pre_process_grubbs(df)
-    pre_process_original(df)
-    
+    pre_process_original(df)'''
+
+def boxplot_outlier(data, target):
+    Q1 = data.quantile(0.25)
+    Q3 = data.quantile(0.75)
+    iqr = stats.iqr(data)#IQR(data)
+    data = data[(data[target]>(Q1-1.5*iqr)) & (data[target]<(Q3+1.5*iqr))]
+    return data
+
 ''' Prune and create CSV based on Hypothesis'''
 def pre_process_manual(df):
     df = df[(df['goal'] <= df['goal'].std()) | ((df['goal'] >= df['goal'].std()) & (df['state'] == 1)) ].copy()
