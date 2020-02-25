@@ -73,7 +73,7 @@ This analysis was conducted as part of the 2018/19 Machine Learning module CS7CS
 [6] StatisticsHowTo (2018). ​Interquartile Range (IQR): What it is and How to Find it - Statistics How To​. [online] Statistics How To. Available at: https://www.statisticshowto.datasciencecentral.com/probability-and-statis tics/interquartile-range/ [Accessed 18 Dec. 2018]. 
 
 ## Appendix
-![​Fig 1: Flowchart of the working of Data Pruning and retrieval of accuracy](%3Cblockquote%20class=%22imgur-embed-pub%22%20lang=%22en%22%20data-id=%22a/C4HokOg%22%20data-context=%22false%22%20%3E%3Ca%20href=%22//imgur.com/a/C4HokOg%22%3E%3C/a%3E%3C/blockquote%3E%3Cscript%20async%20src=%22//s.imgur.com/min/embed.js%22%20charset=%22utf-8%22%3E%3C/script%3E)
+![​Fig 1: Flowchart of the working of Data Pruning and retrieval of accuracy](Fig%201%20-%20Flowchart%20of%20the%20working%20of%20Data%20Pruning%20and%20retrieval%20of%20accuracy.png)
 
-
-![Fig 5: Correlation of Fifa World Cup 2018 features ](https://imgur.com/JkuJKTr)
+![Fig 3 - Dataset Description with missing Percentage (NaN)](Fig%203%20-%20Dataset%20Description%20with%20missing%20Percentage%20(NaN).png)
+![Fig 5: Correlation of Fifa World Cup 2018 features ](Fig%205%20-%20Correlation%20of%20Fifa%20World%20Cup%202018%20features.jpg)
